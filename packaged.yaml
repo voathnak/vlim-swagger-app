@@ -40,7 +40,7 @@ Resources:
     Properties:
       FunctionName:
         Fn::Sub: vlim-swagger-app-${StageName}-hello-world
-      CodeUri: s3://vlim-swagger-app-bucket/0fc53e70d3aea824ad42c901bcf5a222
+      CodeUri: s3://vlim-swagger-app-bucket/d76f3ed7dd1043a98d4b9f70bff25645
       Handler: app.lambda_handler
       Runtime: python3.7
       Events:
@@ -51,6 +51,22 @@ Resources:
               Ref: RestApi
             Path: /hello
             Method: GET
+  PostHelloFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: vlim-swagger-app-${StageName}-PostHelloFunction
+      CodeUri: s3://vlim-swagger-app-bucket/d76f3ed7dd1043a98d4b9f70bff25645
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Events:
+        Get:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: RestApi
+            Path: /post-hello
+            Method: POST
 Outputs:
   ApiUrl:
     Value:

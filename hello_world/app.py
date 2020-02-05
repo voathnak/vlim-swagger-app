@@ -4,6 +4,29 @@ import json
 
 
 def lambda_handler(event, context):
+    # hello = event.get('pathParameters').get('hello')
+    print("event", event)
+
+    httpMethod = event.get('httpMethod')
+
+    if httpMethod == 'POST':
+        body = json.loads(event.get('body'))
+        print("body:", body)
+        word = body.get('hello')
+        return {
+            "statusCode": 200,
+            "headers": {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': True,
+                'Content-Type': 'application/json',
+            },
+            "body": json.dumps({
+                "message": "hello {}".format(word),
+                # "location": ip.text.replace("\n", "")
+            }),
+        }
+
+
     """Sample pure Lambda function
 
     Parameters
