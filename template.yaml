@@ -28,7 +28,12 @@ Resources:
         Fn::Sub: vlim-swagger-app-api-${StageName}
       StageName:
         Ref: StageName
-      Cors: "'*'"
+#      Cors: "'*'"
+      Cors:
+        AllowCredentials: false
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+        AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+        AllowOrigin: "'*'"
       DefinitionBody:
           Fn::Transform:
             Name: AWS::Include
