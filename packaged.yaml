@@ -12,7 +12,6 @@ Parameters:
   S3BucketName:
     Type: String
     Description: The name of the S3 bucket in which the Swagger specification is stored
-    Default: vlim-swagger-app-bucket
   StageName:
     Type: String
     Description: The name of the stage, e.g. "dev", "preprod", "prod"
@@ -25,6 +24,7 @@ Resources:
         Fn::Sub: vlim-swagger-app-api-${StageName}
       StageName:
         Ref: StageName
+      Cors: '''*'''
       DefinitionBody:
         Fn::Transform:
           Name: AWS::Include
@@ -40,7 +40,7 @@ Resources:
     Properties:
       FunctionName:
         Fn::Sub: vlim-swagger-app-${StageName}-hello-world
-      CodeUri: s3://vlim-swagger-app-bucket/b026e75250fb741d2077e940aac00285
+      CodeUri: s3://vlim-swagger-app-bucket/0fc53e70d3aea824ad42c901bcf5a222
       Handler: app.lambda_handler
       Runtime: python3.7
       Events:
@@ -58,4 +58,4 @@ Outputs:
       - ''
       - - https://
         - Ref: RestApi
-        - Fn::Sub: .execute-api.${AWS::Region}.amazonaws.com/dev
+        - Fn::Sub: .execute-api.${AWS::Region}.amazonaws.com/${StageName}

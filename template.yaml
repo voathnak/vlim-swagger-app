@@ -28,6 +28,7 @@ Resources:
         Fn::Sub: vlim-swagger-app-api-${StageName}
       StageName:
         Ref: StageName
+      Cors: "'*'"
       DefinitionBody:
           Fn::Transform:
             Name: AWS::Include

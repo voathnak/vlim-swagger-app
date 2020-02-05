@@ -1,7 +1,10 @@
 openapi: "3.0.1"
+basePath: /dev
 info:
   title: "tasks-api"
   version: "v1.0"
+schemes:
+- https
 paths:
   /hello:
     get:
